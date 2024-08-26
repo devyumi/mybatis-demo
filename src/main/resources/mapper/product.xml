@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mybatis_demo.mapper.ProductMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product(name, price, quantity, manufacturer)
+        VALUES (#{product.name}, #{product.price}, #{product.quantity}, #{product.manufacturer});
+    </insert>
+
+    <select id="findAll">
+        SELECT * FROM product;
+    </select>
+
+    <select id="findById">
+        SELECT * FROM product WHERE id = #{productId};
+    </select>
+
+    <update id="update">
+        UPDATE product
+        SET name = #{product.name}, price = #{product.price}, quantity = #{product.quantity}, manufacturer = #{product.manufacturer}
+        WHERE id = #{product.id};
+    </update>
+</mapper>
