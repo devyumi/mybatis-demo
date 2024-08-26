@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원목록</title>
+
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 20px 20px;
+        }
+    </style>
+</head>
+<body>
+<p><b>회원 목록</b></p>
+<hr width="thin"><br>
+
+<table>
+    <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>이메일</th>
+        <th>전화번호</th>
+    </tr>
+
+    <tr th:each="member: ${memberList}">
+        <td th:text="${member.id}"></td>
+        <td th:text="${member.name}"></td>
+        <td th:text="${member.email}"></td>
+        <td th:text="${member.phone}"></td>
+    </tr>
+</table>
+    <form method="get" th:action="@{/member/write}">
+        <input type="submit" value="회원등록">
+    </form><br>
+
+    <form method="get" th:action="@{/}">
+        <input type="submit" value="홈으로">
+    </form>
+</body>
+</html>
