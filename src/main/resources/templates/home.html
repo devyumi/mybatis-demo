@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+</head>
+<body>
+<p><b>홈</b></p>
+<hr width="thin"><br>
+
+    <form method="get" th:action="@{/members}">
+        <input type="submit" value="회원">
+    </form><br>
+
+    <form method="get" th:action="@{/products}">
+        <input type="submit" value="상품">
+    </form>
+</body>
+</html>
