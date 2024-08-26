@@ -12,9 +12,9 @@ public interface ProductMapper {
 
     void save(@Param("product") Product product);
 
-    List<Product> findAll();
-
     Optional<Product> findById(@Param("productId") Integer productId);
+
+    List<Product> findAll(@Param("type") String type, @Param("keyword") String keyword);
 
     void update(@Param("product") Product product);
 }

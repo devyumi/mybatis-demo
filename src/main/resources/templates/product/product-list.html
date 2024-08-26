@@ -24,6 +24,16 @@
 <p><b>상품 목록</b></p>
 <hr width="thin"><br>
 
+<form method="get" th:action="@{/products}">
+    <select id="type" name="type">
+        <option value="all">전체</option>
+        <option value="name">상품명</option>
+        <option value="manufacturer">제조사</option>
+    </select>
+    <input id="keyword" name="keyword" placeholder="검색어를 입력하세요.">
+    <button type="submit">검색</button>
+</form>
+
 <table>
     <tr>
         <th>번호</th>
@@ -36,8 +46,8 @@
     <tr th:each="product: ${productList}">
         <td th:text="${product.id}"></td>
         <td th:text="${product.name}"></td>
-        <td th:text="${#numbers.formatInteger(product.price, 1, 'COMMA') + '원'}"></td>
-        <td th:text="${#numbers.formatInteger(product.quantity, 1, 'COMMA') + '개'}"></td>
+        <td th:text="${{product.price}}"></td>
+        <td th:text="${{product.quantity}}"></td>
         <td th:text="${product.manufacturer}"></td>
         <td><a th:href="@{/product/edit/{id}(id=${product.id})}" th:text="상품수정" class="button"></a></td>
     </tr>

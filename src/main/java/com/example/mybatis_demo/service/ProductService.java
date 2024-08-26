@@ -17,8 +17,8 @@ public class ProductService {
         productMapper.save(product);
     }
 
-    public List<Product> findProducts() {
-        return productMapper.findAll();
+    public List<Product> findProducts(String type, String keyword) {
+        return productMapper.findAll(type, keyword);
     }
 
     public Optional<Product> findOne(Integer productId) {

@@ -9,17 +9,37 @@
         VALUES (#{product.name}, #{product.price}, #{product.quantity}, #{product.manufacturer});
     </insert>
 
-    <select id="findAll">
-        SELECT * FROM product;
-    </select>
-
     <select id="findById">
         SELECT * FROM product WHERE id = #{productId};
     </select>
 
+    <select id="findAll">
+        SELECT * FROM product WHERE
+        <choose>
+            <when test="keyword != ''">
+                <choose>
+                    <when test="type == 'name'">
+                        name LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+                    <when test="type == 'manufacturer'">
+                        manufacturer LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+                    <when test="type == 'all'">
+                        (name LIKE CONCAT('%', #{keyword}, '%'))
+                        OR (manufacturer LIKE CONCAT('%', #{keyword}, '%'))
+                    </when>
+                </choose>
+            </when>
+            <otherwise>
+                1=1
+            </otherwise>
+        </choose>
+    </select>
+
     <update id="update">
         UPDATE product
-        SET name = #{product.name}, price = #{product.price}, quantity = #{product.quantity}, manufacturer = #{product.manufacturer}
+        SET name = #{product.name}, price = #{product.price}, quantity = #{product.quantity}, manufacturer =
+        #{product.manufacturer}
         WHERE id = #{product.id};
     </update>
 </mapper>
