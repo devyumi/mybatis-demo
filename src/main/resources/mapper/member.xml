@@ -5,11 +5,15 @@
 <mapper namespace="com.example.mybatis_demo.mapper.MemberMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO member(name, email, phone)
-        VALUES (#{member.name}, #{member.email}, #{member.phone});
+        INSERT INTO member(name, email, password, phone, role)
+        VALUES (#{member.name}, #{member.email}, #{member.password}, #{member.phone}, #{member.role});
     </insert>
 
     <select id="findAll">
         SELECT * FROM member;
+    </select>
+
+    <select id="findByEmail">
+        SELECT * FROM member WHERE email = #{email};
     </select>
 </mapper>

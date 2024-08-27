@@ -1,6 +1,7 @@
 package com.example.mybatis_demo.controller;
 
 import com.example.mybatis_demo.domain.Member;
+import com.example.mybatis_demo.dto.JoinDto;
 import com.example.mybatis_demo.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,20 +29,20 @@ public class MemberController {
         return "member/member-list";
     }
 
-    @GetMapping("member/write")
-    public String registerMember(Model model) {
-        model.addAttribute("member", new Member());
-        return "member/member-form";
+    @GetMapping("join")
+    public String join(Model model) {
+        model.addAttribute("joinDto", new JoinDto());
+        return "member/join-form";
     }
 
-    @PostMapping("member/write")
-    public String registerMember(@ModelAttribute @Valid Member member, BindingResult result) {
+    @PostMapping("join")
+    public String join(@ModelAttribute @Valid JoinDto joinDto, BindingResult result) {
         if (result.hasErrors()) {
             printErrorLog(result);
-            return "member/member-form";
+            return "member/join-form";
         }
-        memberService.saveMember(member);
-        log.info("회원등록 완료");
+        memberService.join(joinDto);
+        log.info("회원가입 완료");
         return "redirect:/members";
     }
 

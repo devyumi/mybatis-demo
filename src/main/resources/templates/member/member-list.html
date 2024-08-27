@@ -19,7 +19,7 @@
 <table>
     <tr>
         <th>번호</th>
-        <th>이름</th>
+        <th>회사명</th>
         <th>이메일</th>
         <th>전화번호</th>
     </tr>
@@ -31,7 +31,7 @@
         <td th:text="${member.phone}"></td>
     </tr>
 </table>
-    <form method="get" th:action="@{/member/write}">
+    <form method="get" th:action="@{/join}">
         <input type="submit" value="회원등록">
     </form><br>
 

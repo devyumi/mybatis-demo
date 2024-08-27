@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+<body>
+<p><b>회원가입</b></p>
+<hr width="thin">
+<br>
+
+<form method="post" th:action th:object="${joinDto}">
+    <ul style="list-style: none;">
+        <li>
+            <label for="name">회사명</label>&nbsp;
+            <input type="text" id="name" th:field="*{name}">
+            <div style="color: #ff4238; font-size: 10px;" th:errors="*{name}"></div>
+        </li><br>
+
+        <li>
+            <label for="email">이메일</label>&nbsp;
+            <input type="email" id="email" th:field="*{email}">
+            <div style="color: #ff4238; font-size: 10px;" th:errors="*{email}"></div>
+        </li><br>
+
+        <li>
+            <label for="password">비밀번호</label>&nbsp;
+            <input type="password" id="password" th:field="*{password}" placeholder="비밀번호는 영문, 숫자, 특수기호가 적어도 1개 이상씩 포함된 8~20자">
+            <div style="color: #ff4238; font-size: 10px;" th:errors="*{password}"></div>
+        </li><br>
+
+        <li>
+            <label for="phone">전화번호</label>&nbsp;
+            <input type="text" id="phone" th:field="*{phone}" placeholder="000-0000-0000">
+            <div class="color: #ff4238; font-size: 10px;" th:errors="*{phone}"></div>
+        </li><br>
+
+        <li>
+            <input type="submit" value="등록">
+        </li>
+    </ul>
+</form>
+</body>
+</html>
