@@ -2,6 +2,7 @@ package com.example.mybatis_demo.controller;
 
 import com.example.mybatis_demo.domain.Member;
 import com.example.mybatis_demo.dto.JoinDto;
+import com.example.mybatis_demo.dto.LoginDto;
 import com.example.mybatis_demo.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -43,7 +45,19 @@ public class MemberController {
         }
         memberService.join(joinDto);
         log.info("회원가입 완료");
-        return "redirect:/members";
+        return "redirect:/";
+    }
+
+    @GetMapping("login")
+    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
+        model.addAttribute("loginDto", new LoginDto());
+        model.addAttribute("error", error);
+        return "member/login-form";
+    }
+
+    @PostMapping("logout")
+    public String logout() {
+        return "redirect:/";
     }
 
     private static void printErrorLog(BindingResult result) {
