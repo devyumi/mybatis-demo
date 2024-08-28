@@ -12,12 +12,13 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("products")
 @RequiredArgsConstructor
 @Slf4j
 public class ProductController {
     private final ProductService productService;
 
-    @GetMapping("products")
+    @GetMapping
     public String findProducts(@RequestParam(value = "type", required = false, defaultValue = "") String type,
                                @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, Model model) {
         model.addAttribute("productList", productService.findProducts(type, keyword));
@@ -26,13 +27,13 @@ public class ProductController {
         return "product/product-list";
     }
 
-    @GetMapping("product/write")
+    @GetMapping("save")
     public String registerProduct(Model model) {
         model.addAttribute("product", new Product());
         return "product/product-form";
     }
 
-    @PostMapping("product/write")
+    @PostMapping("save")
     public String registerProduct(@ModelAttribute @Valid Product product, BindingResult result) {
         if (result.hasErrors()) {
             printErrorLog(result);
@@ -43,13 +44,13 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @GetMapping("product/edit/{productId}")
+    @GetMapping("update/{productId}")
     public String editProduct(@PathVariable(value = "productId") Integer productId, Model model) {
         model.addAttribute("product", productService.findOne(productId));
         return "product/product-edit";
     }
 
-    @PostMapping("product/edit")
+    @PostMapping("update")
     public String updateProduct(@ModelAttribute @Valid Product product, BindingResult result) {
         if (result.hasErrors()) {
             printErrorLog(result);

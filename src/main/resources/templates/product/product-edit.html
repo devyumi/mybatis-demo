@@ -9,7 +9,7 @@
 <p><b>상품 수정</b></p>
 <hr width="thin"><br>
 
-<form method="post" th:action="@{/product/edit}" th:object="${product}">
+<form method="post" th:action="@{/products/update}" th:object="${product}">
     <ul style="list-style: none;">
         <li>
             <input type="hidden" th:field="*{id}"/>
