@@ -31,9 +31,15 @@
         </li><br>
 
         <li>
+            <label for="checkedPassword">비밀번호 확인</label>&nbsp;
+            <input type="password" id="checkedPassword" th:field="*{checkedPassword}">
+            <div style="color: #ff4238; font-size: 10px;" th:errors="*{checkedPassword}"></div>
+        </li><br>
+
+        <li>
             <label for="phone">전화번호</label>&nbsp;
             <input type="text" id="phone" th:field="*{phone}" placeholder="000-0000-0000">
-            <div class="color: #ff4238; font-size: 10px;" th:errors="*{phone}"></div>
+            <div style="color: #ff4238; font-size: 10px;" th:errors="*{phone}"></div>
         </li><br>
 
         <li>
