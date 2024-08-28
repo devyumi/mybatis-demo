@@ -13,7 +13,7 @@
 <form method="post" th:action th:object="${joinDto}">
     <ul style="list-style: none;">
         <li>
-            <label for="name">회사명</label>&nbsp;
+            <label for="name">이름</label>&nbsp;
             <input type="text" id="name" th:field="*{name}">
             <div style="color: #ff4238; font-size: 10px;" th:errors="*{name}"></div>
         </li><br>
@@ -43,6 +43,7 @@
         </li><br>
 
         <li>
+            <div style="color: #ff4238; font-size: 10px;" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors()}"></div>
             <input type="submit" value="등록">
         </li>
     </ul>

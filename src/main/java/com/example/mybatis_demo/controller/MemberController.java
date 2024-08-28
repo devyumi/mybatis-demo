@@ -43,9 +43,16 @@ public class MemberController {
             printErrorLog(result);
             return "member/join-form";
         }
-        memberService.join(joinDto);
-        log.info("회원가입 완료");
-        return "redirect:/";
+
+        try {
+            memberService.join(joinDto);
+            log.info("회원가입 완료");
+            return "redirect:/";
+        } catch (IllegalArgumentException e) {
+            result.reject("error", e.getMessage());
+            log.info("error: {} ", e.getMessage());
+            return "member/join-form";
+        }
     }
 
     @GetMapping("login")

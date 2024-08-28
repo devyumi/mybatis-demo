@@ -1,6 +1,5 @@
 package com.example.mybatis_demo.dto;
 
-import com.example.mybatis_demo.service.annotation.PasswordMatch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -10,12 +9,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@PasswordMatch
 public class JoinDto {
-    private Integer id;
 
-    @NotBlank(message = "회사명은 필수 입력 값입니다.")
-    @Size(min = 2, max = 20, message = "회사명은 2자 이상 20자 이자만 가능합니다.")
+    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @Size(min = 2, max = 20, message = "이름은 2자 이상 10자 이자만 가능합니다.")
     @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-zA-Z]+$", message = "한글, 영어만 가능합니다.")
     private String name;
 
