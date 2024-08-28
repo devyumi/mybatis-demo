@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+
+<html xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +12,20 @@
 <p><b>홈</b></p>
 <hr width="thin"><br>
 
-    <form method="get" th:action="@{/members}">
-        <input type="submit" value="회원">
-    </form><br>
+        <form sec:authorize="isAnonymous()" method="get" th:action="@{/join}">
+            <input type="submit" value="회원가입">
+        </form><br>
 
-    <form method="get" th:action="@{/products}">
-        <input type="submit" value="상품">
-    </form>
-</body>
+        <form sec:authorize="isAnonymous()" method="get" th:action="@{/login}">
+            <input type="submit" value="로그인">
+        </form><br>
+
+        <form sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">
+            <input type="submit" value="로그아웃">
+        </form><br>
+
+        <form sec:authorize="isAuthenticated()" method="get" th:action="@{/products}">
+            <input type="submit" value="상품">
+        </form>
+ </body>
 </html>
