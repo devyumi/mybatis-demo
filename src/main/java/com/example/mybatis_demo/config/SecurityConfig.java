@@ -19,7 +19,6 @@ public class SecurityConfig {
     private final LoginSuccess loginSuccess;
     private final LoginFail loginFail;
     private final LogOutSuccess logOutSuccess;
-    private final CustomAccessDeniedHandler deniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,9 +43,6 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .logoutSuccessHandler(logOutSuccess))
-
-                .exceptionHandling(exception -> exception
-                        .accessDeniedHandler(new CustomAccessDeniedHandler()))
 
                 .userDetailsService(customUserDetailsService);
         return http.build();
