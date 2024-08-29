@@ -44,7 +44,11 @@
 
         <li>
             <div style="color: #ff4238; font-size: 10px;" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors()}"></div>
-            <input type="submit" value="등록">
+
+            <div style="text-align: center; display:inline-block">
+                <button type="button" onclick="location.href='/'">홈</button>
+                <input type="submit" value="등록">
+            </div>
         </li>
     </ul>
 </form>

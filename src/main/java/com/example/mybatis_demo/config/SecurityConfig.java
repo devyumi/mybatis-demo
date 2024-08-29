@@ -1,9 +1,6 @@
 package com.example.mybatis_demo.config;
 
-import com.example.mybatis_demo.config.auth.CustomUserDetailsService;
-import com.example.mybatis_demo.config.auth.LogOutSuccess;
-import com.example.mybatis_demo.config.auth.LoginFail;
-import com.example.mybatis_demo.config.auth.LoginSuccess;
+import com.example.mybatis_demo.config.auth.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
@@ -22,6 +19,7 @@ public class SecurityConfig {
     private final LoginSuccess loginSuccess;
     private final LoginFail loginFail;
     private final LogOutSuccess logOutSuccess;
+    private final CustomAccessDeniedHandler deniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -29,7 +27,9 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                         authorizationManagerRequestMatcherRegistry
-                                .requestMatchers("/**").permitAll()
+                                .requestMatchers("/members").hasRole("SUPER_ADMIN")
+                                .requestMatchers("/products").authenticated()
+                                .requestMatchers("/products/save", "/products/update/**").hasAnyRole("SUPER_ADMIN", "ADMIN")
                                 .anyRequest().permitAll())
 
                 .formLogin(login -> login
@@ -44,6 +44,10 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .logoutSuccessHandler(logOutSuccess))
+
+                .exceptionHandling(exception -> exception
+                        .accessDeniedHandler(new CustomAccessDeniedHandler()))
+
                 .userDetailsService(customUserDetailsService);
         return http.build();
     }
