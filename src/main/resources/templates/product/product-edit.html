@@ -9,11 +9,11 @@
 <p><b>상품 수정</b></p>
 <hr width="thin"><br>
 
-<form method="post" th:action="@{/products/update}" th:object="${product}">
+<form method="post" th:action="@{/products/update}" th:object="${productUpdateDto}">
     <ul style="list-style: none;">
         <li>
             <input type="hidden" th:field="*{id}"/>
-            <label for="name">상품명</label>&nbsp;
+            <label for="name">상품명</label>
             <input type="text" id="name" th:field="*{name}">
             <div style="color: #ff4238; font-size: 10px;" th:errors="*{name}"></div>
         </li><br>

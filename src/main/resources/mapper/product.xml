@@ -4,28 +4,43 @@
 
 <mapper namespace="com.example.mybatis_demo.mapper.ProductMapper">
 
+    <resultMap id="ProductResultMap" type="com.example.mybatis_demo.domain.Product">
+        <id property="id" column="p_id"/>
+        <id property="name" column="p_name"/>
+        <id property="price" column="price"/>
+        <id property="quantity" column="quantity"/>
+        <id property="manufacturer" column="manufacturer"/>
+
+        <association property="member" javaType="com.example.mybatis_demo.domain.Member">
+            <id property="name" column="m_name"/>
+        </association>
+    </resultMap>
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO product(name, price, quantity, manufacturer)
-        VALUES (#{product.name}, #{product.price}, #{product.quantity}, #{product.manufacturer});
+        INSERT INTO product(name, price, quantity, manufacturer, member_id)
+        VALUES (#{product.name}, #{product.price}, #{product.quantity}, #{product.manufacturer}, #{product.member.id});
     </insert>
 
     <select id="findById">
         SELECT * FROM product WHERE id = #{productId};
     </select>
 
-    <select id="findAll">
-        SELECT * FROM product WHERE
+    <select id="findAll" resultMap="ProductResultMap">
+        SELECT p.id AS p_id, p.name AS p_name, price, quantity, manufacturer, m.name AS m_name
+        FROM product p
+            JOIN member m ON p.member_id = m.id
+        WHERE
         <choose>
             <when test="keyword != ''">
                 <choose>
                     <when test="type == 'name'">
-                        name LIKE CONCAT('%', #{keyword}, '%')
+                        p.name LIKE CONCAT('%', #{keyword}, '%')
                     </when>
                     <when test="type == 'manufacturer'">
                         manufacturer LIKE CONCAT('%', #{keyword}, '%')
                     </when>
                     <when test="type == 'all'">
-                        (name LIKE CONCAT('%', #{keyword}, '%'))
+                        (p.name LIKE CONCAT('%', #{keyword}, '%'))
                         OR (manufacturer LIKE CONCAT('%', #{keyword}, '%'))
                     </when>
                 </choose>
@@ -34,12 +49,12 @@
                 1=1
             </otherwise>
         </choose>
+        ORDER BY p.id
     </select>
 
     <update id="update">
         UPDATE product
-        SET name = #{product.name}, price = #{product.price}, quantity = #{product.quantity}, manufacturer =
-        #{product.manufacturer}
+        SET name = #{product.name}, price = #{product.price}, quantity = #{product.quantity}, manufacturer = #{product.manufacturer}, member_id = #{product.member.id}
         WHERE id = #{product.id};
     </update>
 </mapper>
