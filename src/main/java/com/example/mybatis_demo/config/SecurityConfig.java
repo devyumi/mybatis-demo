@@ -1,6 +1,9 @@
 package com.example.mybatis_demo.config;
 
-import com.example.mybatis_demo.config.auth.*;
+import com.example.mybatis_demo.config.auth.CustomUserDetailsService;
+import com.example.mybatis_demo.config.auth.LogOutSuccess;
+import com.example.mybatis_demo.config.auth.LoginFail;
+import com.example.mybatis_demo.config.auth.LoginSuccess;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
@@ -24,12 +27,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .httpBasic(Customizer.withDefaults())
-                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
-                        authorizationManagerRequestMatcherRegistry
-                                .requestMatchers("/members").hasRole("SUPER_ADMIN")
-                                .requestMatchers("/products").authenticated()
-                                .requestMatchers("/products/save", "/products/update/**").hasAnyRole("SUPER_ADMIN", "ADMIN")
-                                .anyRequest().permitAll())
+                .authorizeHttpRequests(authorizationManager -> authorizationManager
+                        .requestMatchers("/members").hasRole("SUPER_ADMIN")
+                        .requestMatchers("/products").authenticated()
+                        .requestMatchers("/products/save", "/products/update/**").hasAnyRole("SUPER_ADMIN", "ADMIN")
+                        .anyRequest().permitAll())
 
                 .formLogin(login -> login
                         .loginPage("/login")
