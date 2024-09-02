@@ -6,6 +6,7 @@ import com.example.mybatis_demo.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ public class MemberService {
     private final MemberMapper memberMapper;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     public void join(JoinDto joinDto) {
         checkDuplicationMember(joinDto);
         checkPassword(joinDto);
@@ -29,10 +31,12 @@ public class MemberService {
                 .build());
     }
 
+    @Transactional(readOnly = true)
     public Optional<Member> findMember(String username) {
         return memberMapper.findByEmail(username);
     }
 
+    @Transactional(readOnly = true)
     public List<Member> findMembers() {
         return memberMapper.findAll();
     }

@@ -7,6 +7,7 @@ import com.example.mybatis_demo.dto.ProductUpdateDto;
 import com.example.mybatis_demo.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class ProductService {
     private final ProductMapper productMapper;
 
+    @Transactional
     public void saveProduct(ProductSaveDto productSaveDto, Member member) {
         productMapper.save(Product.builder()
                 .name(productSaveDto.getName())
@@ -26,14 +28,17 @@ public class ProductService {
                 .build());
     }
 
+    @Transactional(readOnly = true)
     public List<Product> findProducts(String type, String keyword) {
         return productMapper.findAll(type, keyword);
     }
 
+    @Transactional(readOnly = true)
     public Optional<Product> findOne(Integer productId) {
         return productMapper.findById(productId);
     }
 
+    @Transactional
     public void updateProduct(ProductUpdateDto productUpdateDto, Member member) {
         productMapper.update(Product.builder()
                 .id(productUpdateDto.getId())
