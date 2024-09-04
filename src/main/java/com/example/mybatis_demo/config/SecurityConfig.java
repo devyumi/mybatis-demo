@@ -44,7 +44,8 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
-                        .logoutSuccessHandler(logOutSuccess))
+                        .logoutSuccessHandler(logOutSuccess)
+                        .deleteCookies("JSESSIONID"))
 
                 .userDetailsService(customUserDetailsService);
         return http.build();
