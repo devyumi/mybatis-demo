@@ -26,7 +26,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(authorizationManager -> authorizationManager
                         .requestMatchers("/members").hasRole("SUPER_ADMIN")
                         .requestMatchers("/products").authenticated()
