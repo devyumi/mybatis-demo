@@ -4,35 +4,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상품등록</title>
+
+    <style>
+        .error{
+            color: #ff4238;
+            font-size: 10px;
+        }
+    </style>
 </head>
 <body>
-<p><b>상품 등록</b></p>
-<hr width="thin"><br>
+<p><b>상품 등록</b></p><hr>
 
 <form method="post" th:action th:object="${productSaveDto}">
     <ul style="list-style: none;">
         <li>
             <label for="name">상품명</label>&nbsp;
             <input type="text" id="name" th:field="*{name}">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{name}"></div>
+            <div class="error" th:errors="*{name}"></div>
         </li><br>
 
         <li>
             <label for="price">가격</label>&nbsp;
             <input type="number" id="price" th:field="*{price}">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{price}"></div>
+            <div class="error" th:errors="*{price}"></div>
         </li><br>
 
         <li>
             <label for="quantity">수량</label>&nbsp;
             <input type="number" id="quantity" th:field="*{quantity}">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{quantity}"></div>
+            <div class="error" th:errors="*{quantity}"></div>
         </li><br>
 
         <li>
             <label for="name">제조사</label>&nbsp;
             <input type="text" id="manufacturer" th:field="*{manufacturer}">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{manufacturer}"></div>
+            <div class="error" th:errors="*{manufacturer}"></div>
         </li><br>
 
         <li>

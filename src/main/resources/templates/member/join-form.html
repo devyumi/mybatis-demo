@@ -4,10 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+
+    <style>
+        .error{
+            color: #ff4238;
+            font-size: 10px;
+        }
+    </style>
 </head>
 <body>
-<p><b>회원가입</b></p>
-<hr width="thin">
+<p><b>회원가입</b></p><hr>
 <br>
 
 <form method="post" th:action th:object="${joinDto}">
@@ -15,35 +21,35 @@
         <li>
             <label for="name">이름</label>&nbsp;
             <input type="text" id="name" th:field="*{name}">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{name}"></div>
+            <div class="error" th:errors="*{name}"></div>
         </li><br>
 
         <li>
             <label for="email">이메일</label>&nbsp;
             <input type="email" id="email" th:field="*{email}">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{email}"></div>
+            <div class="error" th:errors="*{email}"></div>
         </li><br>
 
         <li>
             <label for="password">비밀번호</label>&nbsp;
             <input type="password" id="password" th:field="*{password}" placeholder="비밀번호는 영문, 숫자, 특수기호가 적어도 1개 이상씩 포함된 8~20자">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{password}"></div>
+            <div class="error" th:errors="*{password}"></div>
         </li><br>
 
         <li>
             <label for="checkedPassword">비밀번호 확인</label>&nbsp;
             <input type="password" id="checkedPassword" th:field="*{checkedPassword}">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{checkedPassword}"></div>
+            <div class="error" th:errors="*{checkedPassword}"></div>
         </li><br>
 
         <li>
             <label for="phone">전화번호</label>&nbsp;
             <input type="text" id="phone" th:field="*{phone}" placeholder="000-0000-0000">
-            <div style="color: #ff4238; font-size: 10px;" th:errors="*{phone}"></div>
+            <div class="error" th:errors="*{phone}"></div>
         </li><br>
 
         <li>
-            <div style="color: #ff4238; font-size: 10px;" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors()}"></div>
+            <div class="error" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors()}"></div>
 
             <div style="text-align: center; display:inline-block">
                 <button type="button" onclick="location.href='/'">홈</button>

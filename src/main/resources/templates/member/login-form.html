@@ -4,10 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
+
+    <style>
+        .error{
+            color: #ff4238;
+            font-size: 10px;
+        }
+    </style>
+
 </head>
 <body>
-<p><b>로그인</b></p>
-<hr width="thin">
+<p><b>로그인</b></p><hr>
 <br>
 
 <form method="post" th:action="@{/login}" th:object="${loginDto}">
@@ -23,7 +30,7 @@
         </li><br>
 
         <li>
-            <div style="color: #ff4238; font-size: 10px;" th:if="${error != null}">아이디나 비밀번호를 확인해주세요.</div><br>
+            <div class="error" th:if="${error != null}">아이디나 비밀번호를 확인해주세요.</div><br>
         </li>
 
         <li>
