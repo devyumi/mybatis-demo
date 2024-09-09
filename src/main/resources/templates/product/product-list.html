@@ -4,26 +4,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/style.css}">
     <title>상품목록</title>
 
-    <style>
-        table {
-            border-collapse: separate;
-            border-spacing: 20px 20px;
-        }
-        .button {
-            background-color: #fce205;
-            color: #1e6b7b;
-            border: none;
-            border-radius: 4px;
-            font-size: 15px;
-            text-decoration-line: none;
-        }
-    </style>
 </head>
 <body>
-<p><b>상품 목록</b></p>
-<hr width="thin"><br>
+<p><b>상품 목록</b></p><hr>
 
 <form method="get" th:action="@{/products}">
     <select id="type" name="type">

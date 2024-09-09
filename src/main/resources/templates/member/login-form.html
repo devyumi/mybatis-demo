@@ -3,19 +3,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/style.css}">
     <title>로그인</title>
-
-    <style>
-        .error{
-            color: #ff4238;
-            font-size: 10px;
-        }
-    </style>
 
 </head>
 <body>
 <p><b>로그인</b></p><hr>
-<br>
 
 <form method="post" th:action="@{/login}" th:object="${loginDto}">
     <ul style="list-style: none;">
