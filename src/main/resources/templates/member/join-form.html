@@ -3,54 +3,51 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
     <title>회원가입</title>
 
 </head>
 <body>
-<p><b>회원가입</b></p><hr>
-
-<form method="post" th:action th:object="${joinDto}">
-    <ul style="list-style: none;">
-        <li>
-            <label for="name">이름</label>&nbsp;
+<div class="login-box">
+    <form method="post" th:action th:object="${joinDto}">
+        <div class="user-box">
+            <label for="name">이름</label><br>
             <input type="text" id="name" th:field="*{name}">
             <div class="error" th:errors="*{name}"></div>
-        </li><br>
+        </div>
 
-        <li>
-            <label for="email">이메일</label>&nbsp;
+        <div class="user-box">
+            <label for="email">이메일</label><br>
             <input type="email" id="email" th:field="*{email}">
             <div class="error" th:errors="*{email}"></div>
-        </li><br>
+        </div>
 
-        <li>
-            <label for="password">비밀번호</label>&nbsp;
-            <input type="password" id="password" th:field="*{password}" placeholder="비밀번호는 영문, 숫자, 특수기호가 적어도 1개 이상씩 포함된 8~20자">
+        <div class="user-box">
+            <label for="password">비밀번호</label><br>
+            <input type="password" id="password" th:field="*{password}"
+                   placeholder="비밀번호는 영문, 숫자, 특수기호가 적어도 1개 이상씩 포함된 8~20자">
             <div class="error" th:errors="*{password}"></div>
-        </li><br>
+        </div>
 
-        <li>
-            <label for="checkedPassword">비밀번호 확인</label>&nbsp;
+        <div class="user-box">
+            <label for="checkedPassword">비밀번호 확인</label><br>
             <input type="password" id="checkedPassword" th:field="*{checkedPassword}">
             <div class="error" th:errors="*{checkedPassword}"></div>
-        </li><br>
+        </div>
 
-        <li>
-            <label for="phone">전화번호</label>&nbsp;
+        <div class="user-box">
+            <label for="phone">전화번호</label><br>
             <input type="text" id="phone" th:field="*{phone}" placeholder="000-0000-0000">
             <div class="error" th:errors="*{phone}"></div>
-        </li><br>
+        </div>
 
-        <li>
-            <div class="error" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors()}"></div>
+        <div class="error" th:if="${#fields.hasGlobalErrors()}" th:text="${#fields.globalErrors()}"></div>
 
-            <div style="text-align: center; display:inline-block">
-                <button type="button" onclick="location.href='/'">홈</button>
-                <input type="submit" value="등록">
-            </div>
-        </li>
-    </ul>
-</form>
+        <div style="text-align: center; display:inline-block">
+            <button type="button" onclick="location.href='/'">홈</button>
+            <input type="submit" value="등록">
+        </div>
+    </form>
+</div>
 </body>
 </html>
