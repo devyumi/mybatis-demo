@@ -30,8 +30,8 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public List<Product> findProducts(String type, String keyword) {
-        return productMapper.findAll(type, keyword);
+    public List<Product> findProducts(String type, String keyword, Long offset, int limit) {
+        return productMapper.findAll(type, keyword, offset, limit);
     }
 
     @Transactional(readOnly = true)

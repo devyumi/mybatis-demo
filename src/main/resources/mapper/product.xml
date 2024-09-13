@@ -50,6 +50,11 @@
             </otherwise>
         </choose>
         ORDER BY p.id
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="count">
+        SELECT count(id) FROM product;
     </select>
 
     <update id="update">

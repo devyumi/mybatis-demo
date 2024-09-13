@@ -8,6 +8,8 @@ import com.example.mybatis_demo.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +27,9 @@ public class ProductController {
 
     @GetMapping
     public String findProducts(@RequestParam(value = "type", required = false, defaultValue = "") String type,
-                               @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, Model model) {
-        model.addAttribute("productList", productService.findProducts(type, keyword));
+                               @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, Model model,
+                               @PageableDefault(size = 5) Pageable pageable) {
+        model.addAttribute("productList", productService.findProducts(type, keyword, pageable.getOffset(), pageable.getPageSize()));
         model.addAttribute("type", type);
         model.addAttribute("keyword", keyword);
         return "product/product-list";

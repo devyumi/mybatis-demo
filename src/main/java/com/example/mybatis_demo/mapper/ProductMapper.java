@@ -14,7 +14,9 @@ public interface ProductMapper {
 
     Optional<Product> findById(@Param("productId") Integer productId);
 
-    List<Product> findAll(@Param("type") String type, @Param("keyword") String keyword);
+    List<Product> findAll(@Param("type") String type, @Param("keyword") String keyword, @Param("offset") Long offset, @Param("limit") int limit);
+
+    int count();
 
     void update(@Param("product") Product product);
 }
