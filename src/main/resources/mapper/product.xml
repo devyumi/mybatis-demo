@@ -29,28 +29,28 @@
         SELECT p.id AS p_id, p.name AS p_name, price, quantity, manufacturer, m.name AS m_name
         FROM product p
             JOIN member m ON p.member_id = m.id
-        WHERE
+
         <choose>
-            <when test="keyword != ''">
+            <when test="requestDto.keyword != ''">
                 <choose>
-                    <when test="type == 'name'">
-                        p.name LIKE CONCAT('%', #{keyword}, '%')
+                    <when test="requestDto.type == 'name'">
+                        WHERE p.name LIKE CONCAT('%', #{requestDto.keyword}, '%')
                     </when>
-                    <when test="type == 'manufacturer'">
-                        manufacturer LIKE CONCAT('%', #{keyword}, '%')
+                    <when test="requestDto.type == 'manufacturer'">
+                        WHERE manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%')
                     </when>
-                    <when test="type == 'all'">
-                        (p.name LIKE CONCAT('%', #{keyword}, '%'))
-                        OR (manufacturer LIKE CONCAT('%', #{keyword}, '%'))
+                    <when test="requestDto.type == 'all'">
+                        WHERE (p.name LIKE CONCAT('%', #{requestDto.keyword}, '%'))
+                        OR (manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%'))
                     </when>
                 </choose>
             </when>
             <otherwise>
-                1=1
+                WHERE 1=1
             </otherwise>
         </choose>
         ORDER BY p.id
-        LIMIT #{offset}, #{limit}
+        LIMIT #{requestDto.page}, #{requestDto.size};
     </select>
 
     <select id="count">

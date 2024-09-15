@@ -4,16 +4,19 @@ import com.example.mybatis_demo.domain.Member;
 import com.example.mybatis_demo.domain.Product;
 import com.example.mybatis_demo.dto.ProductSaveDto;
 import com.example.mybatis_demo.dto.ProductUpdateDto;
+import com.example.mybatis_demo.dto.RequestDto;
+import com.example.mybatis_demo.dto.ResponseDto;
 import com.example.mybatis_demo.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductMapper productMapper;
@@ -30,8 +33,17 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public List<Product> findProducts(String type, String keyword, Long offset, int limit) {
-        return productMapper.findAll(type, keyword, offset, limit);
+    public ResponseDto findProducts(RequestDto requestDto) {
+
+        ResponseDto responseDto = ResponseDto.builder()
+                .requestDto(requestDto)
+                .products(productMapper.findAll(requestDto))
+                .total(productMapper.count())
+                .build();
+
+        log.info("total {} ", responseDto.getTotal());
+        log.info("end: {} ", responseDto.getEnd());
+        return  responseDto;
     }
 
     @Transactional(readOnly = true)

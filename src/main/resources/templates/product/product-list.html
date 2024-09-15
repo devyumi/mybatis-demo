@@ -31,7 +31,7 @@
         <th>등록자 (마지막 수정자)</th>
     </tr>
 
-    <tr th:each="product: ${productList}">
+    <tr th:each="product: ${productList.products}">
         <td th:text="${product.id}"></td>
         <td th:text="${product.name}"></td>
         <td th:text="${{product.price}}"></td>
@@ -43,6 +43,24 @@
         </td>
     </tr>
 </table>
+<div>
+    <ul style="list-style: none;">
+        <li>
+            <a th:href="@{/products(page=${productList.page - 10 >= 0 ? productList.page - 10 : 0})}">prev</a>
+        </li>
+
+        <li>
+            <th:block th:each="i : ${#numbers.sequence(productList.page, productList.page + 9)}" th:if="${productList.page} <= ${productList.end}">
+                <a th:href="@{/products(page=${i})}" th:text="${i} + 1"></a>
+            </th:block>
+        </li>
+
+        <li>
+            <a th:href="@{/products(page=${productList.page + 10 <= productList.end ? productList.page + 10 : productList.end)}}">next</a>
+        </li>
+    </ul>
+</div>
+
 <ul style="list-style: none;">
     <li>
         <div style="text-align: center; display:inline-block">

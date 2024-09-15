@@ -1,6 +1,7 @@
 package com.example.mybatis_demo.mapper;
 
 import com.example.mybatis_demo.domain.Product;
+import com.example.mybatis_demo.dto.RequestDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,7 +15,7 @@ public interface ProductMapper {
 
     Optional<Product> findById(@Param("productId") Integer productId);
 
-    List<Product> findAll(@Param("type") String type, @Param("keyword") String keyword, @Param("offset") Long offset, @Param("limit") int limit);
+    List<Product> findAll(@Param("requestDto") RequestDto requestDto);
 
     int count();
 

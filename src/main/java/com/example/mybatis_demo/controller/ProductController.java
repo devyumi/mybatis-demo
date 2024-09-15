@@ -3,13 +3,12 @@ package com.example.mybatis_demo.controller;
 import com.example.mybatis_demo.config.auth.CustomUserDetails;
 import com.example.mybatis_demo.dto.ProductSaveDto;
 import com.example.mybatis_demo.dto.ProductUpdateDto;
+import com.example.mybatis_demo.dto.RequestDto;
 import com.example.mybatis_demo.service.MemberService;
 import com.example.mybatis_demo.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +25,8 @@ public class ProductController {
     private final MemberService memberService;
 
     @GetMapping
-    public String findProducts(@RequestParam(value = "type", required = false, defaultValue = "") String type,
-                               @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, Model model,
-                               @PageableDefault(size = 5) Pageable pageable) {
-        model.addAttribute("productList", productService.findProducts(type, keyword, pageable.getOffset(), pageable.getPageSize()));
-        model.addAttribute("type", type);
-        model.addAttribute("keyword", keyword);
+    public String findProducts(RequestDto requestDto, Model model) {
+        model.addAttribute("productList", productService.findProducts(requestDto));
         return "product/product-list";
     }
 
