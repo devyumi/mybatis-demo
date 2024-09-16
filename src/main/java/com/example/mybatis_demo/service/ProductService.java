@@ -34,16 +34,11 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ResponseDto findProducts(RequestDto requestDto) {
-
-        ResponseDto responseDto = ResponseDto.builder()
+        return ResponseDto.builder()
                 .requestDto(requestDto)
                 .products(productMapper.findAll(requestDto))
-                .total(productMapper.count())
+                .total(productMapper.count(requestDto))
                 .build();
-
-        log.info("total {} ", responseDto.getTotal());
-        log.info("end: {} ", responseDto.getEnd());
-        return  responseDto;
     }
 
     @Transactional(readOnly = true)

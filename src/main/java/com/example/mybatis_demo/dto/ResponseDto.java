@@ -15,6 +15,8 @@ public class ResponseDto {
     private Integer page;
     private Integer size;
     private Integer total;
+    private Integer last;
+    private Integer start;
     private Integer end;
     private List<Product> products;
 
@@ -22,8 +24,10 @@ public class ResponseDto {
     public ResponseDto(RequestDto requestDto, List<Product> products, Integer total) {
         this.page = requestDto.getPage();
         this.size = requestDto.getSize();
-        this.total = total;
         this.products = products;
-        this.end = (int) Math.ceil(total/(double)size);
+        this.total = total;
+        this.last = (int) Math.ceil(total/(double)size);
+        this.start = page / 10 * 10 + 1;
+        this.end = Math.min(start + 9, last);
     }
 }

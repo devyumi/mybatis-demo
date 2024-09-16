@@ -17,7 +17,7 @@ public interface ProductMapper {
 
     List<Product> findAll(@Param("requestDto") RequestDto requestDto);
 
-    int count();
+    Integer count(@Param("requestDto") RequestDto requestDto);
 
     void update(@Param("product") Product product);
 }

@@ -5,11 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/page.css}">
     <title>상품목록</title>
 
 </head>
 <body>
-<p><b>상품 목록</b></p><hr>
+<p><b>상품 목록</b></p>
+<hr>
 
 <form method="get" th:action="@{/products}">
     <select id="type" name="type">
@@ -39,24 +41,23 @@
         <td th:text="${product.manufacturer}"></td>
         <td th:text="${product.member.name}"></td>
         <td>
-            <a sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN')" th:href="@{/products/update/{id}(id=${product.id})}" th:text="상품수정" class="button btnOrange btnPush"></a>
+            <a sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN')"
+               th:href="@{/products/update/{id}(id=${product.id})}" th:text="상품수정" class="button btnOrange btnPush"></a>
         </td>
     </tr>
 </table>
-<div>
-    <ul style="list-style: none;">
+<div class="page">
+    <ul class="pagination modal">
         <li>
-            <a th:href="@{/products(page=${productList.page - 10 >= 0 ? productList.page - 10 : 0})}">prev</a>
+            <a class="num" th:href="@{/products(page=${productList.page - 10 >= 0 ? productList.page - 10 : 0})}"><<</a>
+        </li>
+
+        <li th:each="i : ${#numbers.sequence(productList.start, productList.end)}">
+            <a class="num" th:href="@{/products(page=${i - 1})}" th:text="${i}"></a>
         </li>
 
         <li>
-            <th:block th:each="i : ${#numbers.sequence(productList.page, productList.page + 9)}" th:if="${productList.page} <= ${productList.end}">
-                <a th:href="@{/products(page=${i})}" th:text="${i} + 1"></a>
-            </th:block>
-        </li>
-
-        <li>
-            <a th:href="@{/products(page=${productList.page + 10 <= productList.end ? productList.page + 10 : productList.end)}}">next</a>
+            <a class="num" th:href="@{/products(page=${productList.page + 10 <= productList.last - 1 ? productList.page + 10 : productList.last - 1})}">>></a>
         </li>
     </ul>
 </div>
@@ -66,7 +67,9 @@
         <div style="text-align: center; display:inline-block">
             <a href="" title="Button fade lightblue" class="button btnFade btnLightBlue">Fade</a>
             <button type="button" onclick="location.href='/'">홈</button>
-            <button sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN')" type="button" onclick="location.href='products/save'">상품등록</button>
+            <button sec:authorize="hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN')" type="button"
+                    onclick="location.href='products/save'">상품등록
+            </button>
         </div>
     </li>
 </ul>

@@ -14,4 +14,8 @@ public class RequestDto {
     private String keyword;
     private Integer page = 0;
     private Integer size = 10;
+
+    public Integer getOffset() {
+        return page * size;
+    }
 }

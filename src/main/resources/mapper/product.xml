@@ -50,11 +50,32 @@
             </otherwise>
         </choose>
         ORDER BY p.id
-        LIMIT #{requestDto.page}, #{requestDto.size};
+        LIMIT #{requestDto.offset}, #{requestDto.size};
     </select>
 
-    <select id="count">
-        SELECT count(id) FROM product;
+    <select id="count" resultType="int">
+        SELECT COUNT(p.id)
+        FROM product p
+            JOIN member m ON p.member_id = m.id
+        <choose>
+            <when test="requestDto.keyword != ''">
+                <choose>
+                    <when test="requestDto.type == 'name'">
+                        WHERE p.name LIKE CONCAT('%', #{requestDto.keyword}, '%')
+                    </when>
+                    <when test="requestDto.type == 'manufacturer'">
+                        WHERE manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%')
+                    </when>
+                    <when test="requestDto.type == 'all'">
+                        WHERE (p.name LIKE CONCAT('%', #{requestDto.keyword}, '%'))
+                        OR (manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%'))
+                    </when>
+                </choose>
+            </when>
+            <otherwise>
+                WHERE 1=1
+            </otherwise>
+        </choose>
     </select>
 
     <update id="update">
