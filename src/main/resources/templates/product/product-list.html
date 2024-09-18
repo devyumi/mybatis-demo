@@ -53,11 +53,13 @@
         </li>
 
         <li th:each="i : ${#numbers.sequence(productList.start, productList.end)}">
-            <a class="num" th:href="@{/products(page=${i - 1})}" th:text="${i}"></a>
+            <a class="num" th:if="${productList.keyword} == null" th:href="@{/products(page=${i - 1})}" th:text="${i}"></a>
+            <a class="num" th:if="${productList.keyword} != null" th:href="@{/products(type=${productList.type}, keyword=${productList.keyword}, page=${i - 1})}" th:text="${i}"></a>
         </li>
 
         <li>
-            <a class="num" th:href="@{/products(page=${productList.page + 10 <= productList.last - 1 ? productList.page + 10 : productList.last - 1})}">>></a>
+            <a class="num" th:if="${productList.keyword} == null" th:href="@{/products(page=${productList.page + 10 <= productList.last - 1 ? productList.page + 10 : productList.last - 1})}">>></a>
+            <a class="num" th:if="${productList.keyword} != null" th:href="@{/products(type=${productList.type}, keyword=${productList.keyword}, page=${productList.page + 10 <= productList.last - 1 ? productList.page + 10 : productList.last - 1})}">>></a>
         </li>
     </ul>
 </div>

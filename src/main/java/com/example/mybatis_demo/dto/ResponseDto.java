@@ -14,6 +14,8 @@ import java.util.List;
 public class ResponseDto {
     private Integer page;
     private Integer size;
+    private String type;
+    private String keyword;
     private Integer total;
     private Integer last;
     private Integer start;
@@ -24,6 +26,8 @@ public class ResponseDto {
     public ResponseDto(RequestDto requestDto, List<Product> products, Integer total) {
         this.page = requestDto.getPage();
         this.size = requestDto.getSize();
+        this.type = requestDto.getType();
+        this.keyword = requestDto.getKeyword();
         this.products = products;
         this.total = total;
         this.last = (int) Math.ceil(total/(double)size);
