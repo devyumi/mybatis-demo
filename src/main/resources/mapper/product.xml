@@ -30,24 +30,16 @@
         FROM product p
         JOIN member m ON p.member_id = m.id
 
-        <where>
-            <choose>
-                <when test="requestDto.keyword != ''">
-                    <choose>
-                        <when test="requestDto.type == 'name'">
-                            p.name LIKE CONCAT('%', #{requestDto.keyword}, '%')
-                        </when>
-                        <when test="requestDto.type == 'manufacturer'">
-                            manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%')
-                        </when>
-                        <when test="requestDto.type == 'all'">
-                            (p.name LIKE CONCAT('%', #{requestDto.keyword}, '%'))
-                            OR (manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%'))
-                        </when>
-                    </choose>
-                </when>
-            </choose>
-        </where>
+        <if test="requestDto.keyword != ''">
+            <trim prefix="WHERE" prefixOverrides="OR">
+                <if test="requestDto.type == 'name' or requestDto.type == 'all'">
+                    p.name LIKE CONCAT('%', #{requestDto.keyword}, '%')
+                </if>
+                <if test="requestDto.type == 'manufacturer' or requestDto.type == 'all'">
+                    OR manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%')
+                </if>
+            </trim>
+        </if>
         ORDER BY p.id
         LIMIT #{requestDto.offset}, #{requestDto.size}
     </select>
@@ -56,25 +48,16 @@
         SELECT COUNT(p.id)
         FROM product p
         JOIN member m ON p.member_id = m.id
-
-        <where>
-            <choose>
-                <when test="requestDto.keyword != ''">
-                    <choose>
-                        <when test="requestDto.type == 'name'">
-                            p.name LIKE CONCAT('%', #{requestDto.keyword}, '%')
-                        </when>
-                        <when test="requestDto.type == 'manufacturer'">
-                            manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%')
-                        </when>
-                        <when test="requestDto.type == 'all'">
-                            (p.name LIKE CONCAT('%', #{requestDto.keyword}, '%'))
-                            OR (manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%'))
-                        </when>
-                    </choose>
-                </when>
-            </choose>
-        </where>
+        <if test="requestDto.keyword != ''">
+            <trim prefix="WHERE" prefixOverrides="OR">
+                <if test="requestDto.type == 'name' or requestDto.type == 'all'">
+                    p.name LIKE CONCAT('%', #{requestDto.keyword}, '%')
+                </if>
+                <if test="requestDto.type == 'manufacturer' or requestDto.type == 'all'">
+                    OR manufacturer LIKE CONCAT('%', #{requestDto.keyword}, '%')
+                </if>
+            </trim>
+        </if>
     </select>
 
     <update id="update">
