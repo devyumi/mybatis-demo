@@ -1,5 +1,7 @@
 package com.example.mybatis_demo.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +14,14 @@ import lombok.NoArgsConstructor;
 public class RequestDto {
     private String type;
     private String keyword;
+
+    @Positive
+    @Max(value = 1000000)
+    private Integer priceFrom;
+
+    @Positive
+    @Max(value = 1000000)
+    private Integer priceTo;
     private Integer page = 0;
     private Integer size = 10;
 

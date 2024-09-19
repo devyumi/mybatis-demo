@@ -16,6 +16,8 @@ public class ResponseDto {
     private Integer size;
     private String type;
     private String keyword;
+    private Integer priceFrom;
+    private Integer priceTo;
     private Integer total;
     private Integer last;
     private Integer start;
@@ -28,9 +30,11 @@ public class ResponseDto {
         this.size = requestDto.getSize();
         this.type = requestDto.getType();
         this.keyword = requestDto.getKeyword();
+        this.priceFrom = requestDto.getPriceFrom();
+        this.priceTo = requestDto.getPriceTo();
         this.products = products;
         this.total = total;
-        this.last = (int) Math.ceil(total/(double)size);
+        this.last = (int) Math.ceil(total / (double) size);
         this.start = page / 10 * 10 + 1;
         this.end = Math.min(start + 9, last);
     }
