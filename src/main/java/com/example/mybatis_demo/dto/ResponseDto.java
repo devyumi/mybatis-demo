@@ -35,7 +35,7 @@ public class ResponseDto {
         this.products = products;
         this.total = total;
         this.last = (int) Math.ceil(total / (double) size);
-        this.start = page / 10 * 10 + 1;
-        this.end = Math.min(start + 9, last);
+        this.start = (page - 1) / 10 * 10 + 1;
+        this.end = (last == 0) ? 1 : Math.min(start + 9, last);
     }
 }

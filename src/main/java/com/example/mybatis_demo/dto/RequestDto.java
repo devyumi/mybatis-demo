@@ -22,10 +22,10 @@ public class RequestDto {
     @Positive
     @Max(value = 1000000)
     private Integer priceTo;
-    private Integer page = 0;
+    private Integer page = 1;
     private Integer size = 10;
 
     public Integer getOffset() {
-        return page * size;
+        return (page - 1) * size;
     }
 }
