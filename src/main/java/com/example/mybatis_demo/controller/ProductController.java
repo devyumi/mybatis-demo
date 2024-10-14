@@ -43,15 +43,15 @@ public class ProductController {
             printErrorLog(result);
             return "product/product-form";
         }
-        productService.saveProduct(productSaveDto, memberService.findMember(auth.getUsername()).get());
+        productService.saveProduct(productSaveDto, memberService.findMember(auth.getUsername()));
         log.info("상품등록 완료 | 등록자: {}", auth.getName());
         return "redirect:/products";
     }
 
     @GetMapping("update/{productId}")
     public String editProduct(@AuthenticationPrincipal CustomUserDetails auth,
-                              @PathVariable(value = "productId") Integer productId, Model model) {
-        model.addAttribute("productUpdateDto", productService.findOne(productId));
+                              @PathVariable(value = "productId") Long productId, Model model) {
+        model.addAttribute("productUpdateDto", productService.findProduct(productId));
         return "product/product-edit";
     }
 
@@ -62,7 +62,7 @@ public class ProductController {
             printErrorLog(result);
             return "product/product-edit";
         }
-        productService.updateProduct(productUpdateDto, memberService.findMember(auth.getUsername()).get());
+        productService.updateProduct(productUpdateDto, memberService.findMember(auth.getUsername()));
         log.info("상품수정 완료 | 수정자: {}", auth.getName());
         return "redirect:/products";
     }
