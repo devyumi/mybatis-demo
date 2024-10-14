@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Product {
-    private Integer id;
+    private Long id;
     private String name;
 
     @NumberFormat(pattern = "#,###원")
