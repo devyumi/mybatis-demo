@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ProductUpdateDto {
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "상품명은 필수 입력 값입니다.")
     @Size(min = 2, max = 20, message = "상품명은 2자 이상 20자 이하만 가능합니다.")
