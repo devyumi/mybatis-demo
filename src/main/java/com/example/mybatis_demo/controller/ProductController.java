@@ -49,8 +49,7 @@ public class ProductController {
     }
 
     @GetMapping("update/{productId}")
-    public String editProduct(@AuthenticationPrincipal CustomUserDetails auth,
-                              @PathVariable(value = "productId") Long productId, Model model) {
+    public String editProduct(@PathVariable(value = "productId") Long productId, Model model) {
         model.addAttribute("productUpdateDto", productService.findProduct(productId));
         return "product/product-edit";
     }
