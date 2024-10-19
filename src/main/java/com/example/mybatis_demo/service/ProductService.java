@@ -38,8 +38,8 @@ public class ProductService {
     public ResponseDto findProducts(RequestDto requestDto) {
         return ResponseDto.builder()
                 .requestDto(requestDto)
-                .products(productMapper.findAll(requestDto))
-                .total(productMapper.count(requestDto))
+                .products(productRepository.findAll(requestDto))
+                .total(productRepository.count(requestDto))
                 .build();
     }
 
