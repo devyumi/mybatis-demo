@@ -22,7 +22,11 @@ public class RequestDto {
     @Positive
     @Max(value = 1000000)
     private Integer priceTo;
+
+    @Builder.Default
     private Integer page = 1;
+
+    @Builder.Default
     private Integer size = 10;
 
     public Integer getOffset() {
