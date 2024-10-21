@@ -58,18 +58,11 @@ public class ProductCustomRepositoryImpl implements ProductCustomRepository {
                     result.where(booleanBuilder);
                 }
 
-                case "name" -> {
-                    result.where(product.name.contains(requestDto.getKeyword()));
-                }
+                case "name" -> result.where(product.name.contains(requestDto.getKeyword()));
 
-                case "manufacturer" -> {
-                    result.where(product.manufacturer.contains(requestDto.getKeyword()));
+                case "manufacturer" -> result.where(product.manufacturer.contains(requestDto.getKeyword()));
 
-                }
-
-                case "price" -> {
-                    result.where(product.price.between(requestDto.getPriceFrom(), requestDto.getPriceTo()));
-                }
+                case "price" -> result.where(product.price.between(requestDto.getPriceFrom(), requestDto.getPriceTo()));
             }
         }
     }
