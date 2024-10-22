@@ -22,11 +22,13 @@
             <option value="manufacturer">제조사</option>
             <option value="price">가격</option>
         </select>
-        <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요.">
+        <div style="display: inline-block">
+            <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요.">
 
-        <div id="price" style="display: none">
-            <input type="number" id="priceFrom" name="priceFrom" placeholder="최저 가격을 입력하세요." disabled> ~
-            <input type="number" id="priceTo" name="priceTo" placeholder="최대 가격을 입력하세요." disabled> 원
+            <div id="price" style="display: none">
+                <input type="number" id="priceFrom" name="priceFrom" placeholder="최저 가격을 입력하세요." disabled> ~
+                <input type="number" id="priceTo" name="priceTo" placeholder="최대 가격을 입력하세요." disabled> 원
+            </div>
         </div>
 
         <button type="submit">검색</button>
