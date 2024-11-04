@@ -4,6 +4,7 @@ import com.example.mybatis_demo.domain.Member;
 import com.example.mybatis_demo.dto.JoinDto;
 import com.example.mybatis_demo.dto.LoginDto;
 import com.example.mybatis_demo.service.MemberService;
+import com.example.mybatis_demo.service.SmsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import java.util.List;
 @Slf4j
 public class MemberController {
     private final MemberService memberService;
+    private final SmsService smsService;
 
     @GetMapping("members")
     public String findMembers(Model model) {
@@ -45,6 +47,7 @@ public class MemberController {
         }
 
         try {
+            smsService.sendMessage(joinDto.getPhone());
             memberService.join(joinDto);
             log.info("회원가입 완료");
             return "redirect:/";
