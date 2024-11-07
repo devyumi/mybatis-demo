@@ -18,6 +18,7 @@ public class MemberService {
     private final MemberMapper memberMapper;
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final SmsService smsService;
 
     @Transactional
     public void join(JoinDto joinDto) {
