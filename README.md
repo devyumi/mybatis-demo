@@ -1,5 +1,7 @@
 # 🌟 MyBatis를 활용한 상품 및 회원 관리 프로젝트
-MyBatis를 활용하여 상품 및 회원 관리 기능을 구현하기 위한 프로젝트입니다.
+<p>MyBatis를 활용하여 상품 및 회원 관리 기능을 구현하기 위한 프로젝트입니다.</p>
+
+[<img src="https://img.shields.io/badge/velog 바로가기-20C997?style=for-the-badge&logo=velog&logoColor=white"/>](https://velog.io/@devyumi/개인-MyBatis를-활용한-회원-및-상품-관리)
 
 <br>
 
